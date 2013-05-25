@@ -195,7 +195,7 @@
 	<option value="">Freeza</option>
 	</select>
 	<input type="text" id="txt_input2" name="txt_input2" maxlength="3" style="width:64px" />
-	<button class = "clicker">mr. pogi & co.</button><div id = "warning" >warning: ratio chu chu!</div>
+	<button class = "clicker">mr. pogi & co.</button><div id = "warning" >bawal yan!</div>
 	<br/>
 	<ul id = "my_ul2">
 	List ni Goku
