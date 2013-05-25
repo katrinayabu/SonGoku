@@ -64,130 +64,148 @@
 	}
 	</style>
 	
-	   <script type = "text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> </script>
-       
-        <script type = "text/javascript">
- 
-       
- 
-        var count = 0;
-        var ratio = 100;
- 
+	<script type = "text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> </script>
+	
+	<script type = "text/javascript">
+
+	
+
+	var count = 0;
+	var ratio = 100;
+	var total = 0;
+
 		$(document).ready(function(){
 
-				$("#warning").hide();
-				$("#txt_input1").val(ratio);
-	   
-				$(".clicker2").click(function(){
-					if($("#my_ul2 li").length < 1){
-						$("#my_ul2").append('<li>' + "Son Goku " +$("#txt_input1").val()+ "%" + '</li>');
-					}
-					else{
-						alert("oooppss isa lang..");
-					}
-				});
-			   
-				 $(".clicker").click(function(){
-					if($("#my_ul li").length < 2){
-						$("#my_ul").append('<li>'+ '<input type="hidden" class="hide" value="'+$("#txt_input2").val()+'" />'
-												+ $('#sel').find("option:selected").text() + "&nbsp;&nbsp;" + $("#txt_input2").val() + "%" + '</li>');
-					}
-					else{
-						alert("hanggang dalawa lang pre..");
-					}
-					$("#txt_input2").val("");
+			$("#warning").hide();
+		
+			$(".clicker2").click(function(){
+				if($("#my_ul2 li").length < 1){
+					$("#my_ul2").append('<li>' + "Son Goku " +$("#txt_input1").val()+ "%" + '</li>');
+				}
+				else{
+					alert("oooppss isa lang..");
+				}
+			});
+			
+			 $(".clicker").click(function(){
+			 	
 
-					count++;
-					total = 0;
+				if($("#my_ul li").length < 2){
+					$("#my_ul").append('<li>'+ '<input type="hidden" class="hide" value="'+$("#txt_input2").val()+'" />'
+										+ $('#sel').find("option:selected").text() + "&nbsp;&nbsp;" + $("#txt_input2").val() + "%" + '</li>');
+				}
+				else{
+					alert("hanggang dalawa lang pre..");
+				}
+				$("#txt_input2").val("");
 
-					$("#my_ul li").find($(".hide")).each(function(){
-						var palit = parseInt($(this).val());
-						console.log(palit);
-						total += palit;
+
+				count++;
+			 	total = 0;
+
+			 	$("#my_ul li").find($(".hide")).each(function(){
+							var palit = parseInt($(this).val());
+							console.log(palit);
+							total += palit;
 					});
+
 						ratio = 100 - total;
 						console.log("hello world");
 						$("#txt_input1").val(ratio);
-						
+
+
 				});
 
-				 $("#txt_input2").on("keyup",function(){
-					console.log($(this).val() + " --- " + ratio + !(isNaN($(this).val())) );
+			 $("#txt_input2").on("keyup",function(){
 
-					if(ratio>=parseInt($(this).val()) ){
-							$(".clicker").fadeIn();
-							$("#warning").fadeOut();
-					}
-					else{
-							$(".clicker").fadeOut();
-							$("#warning").fadeIn();
-					}
+			 	console.log($(this).val() + " --- " + ratio + !(isNaN($(this).val())) );
 
-				 });
+			 	if(parseInt($(this).val()) > 50 ){
 
-				   
-				$(".belat").click(function(){
+			 		$(".clicker").fadeOut();
+			 		$("#warning").fadeIn();
+
+			 	}
+
+			 	else if((ratio-total)>=parseInt($(this).val()) ){
+
+			 		$(".clicker").fadeIn();
+			 		$("#warning").fadeOut();
+
+			 	}else{
+
+			 		$(".clicker").fadeOut();
+			 		$("#warning").fadeIn();
+
+			 	}
+
+			 });
+
+			   
+			$(".belat").click(function(){
+					
 					var one = parseInt($("#txt_input1").val());
-					var total = 0;
+					var total1 = 0;
 					if(isNaN(one)){
 					  one = 0;
 					}
-			   
+				   
 					$("#my_ul li").find($(".hide")).each(function(){
-									var palit = parseInt($(this).val());
-									console.log(palit);
-									total += palit;
+							var palit = parseInt($(this).val());
+							console.log(palit);
+							total1 += palit;
 					});
-					var superdupertotal = total+one;
+					var superdupertotal = total1+one;
 					alert("sum: " +superdupertotal+ "%");
-							   
-				});
+
+					
+
+			});
 
 		});
 
 </script>
- 
+
 </head>
 <body>
- 
+
 <div id="container">
-        <!-- <h1>Welcome to CodeIgniter!</h1>
- 
-        <div id="body">
-                <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
- 
-                <p>If you would like to edit this page you'll find it located at:</p>
-                <code>application/views/welcome_message.php</code>
- 
-                <p>The corresponding controller for this page is found at:</p>
-                <code>application/controllers/welcome.php</code>
- 
-                <p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-        </div>
- 
-        <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>-->
-       
-        <input type="text" id="txt_input1" name="txt_input1" disabled />
-        <button class = "clicker2">son goku</button>
-        <br/>
-        <select id="sel">
-        <option value="">Majinboo</option>
-        <option value="">Cell</option>
-        <option value="">Freeza</option>
-        </select>
-        <input type="text" id="txt_input2" name="txt_input2" maxlength="3" style="width:64px" />
-        <button class = "clicker">mr. pogi & co.</button>
-		<div id = "warning" >warning: ratio chu chu!</div>
-        <br/>
-        <ul id = "my_ul2">
-        List ni Goku
-        </ul>
-        <br/>
-        <ul id = "my_ul">
-        List ni Mr. Pogi & Co.
-        </ul>
-        <button class = "belat">show me the money</button>
+	<!-- <h1>Welcome to CodeIgniter!</h1>
+
+	<div id="body">
+		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+
+		<p>If you would like to edit this page you'll find it located at:</p>
+		<code>application/views/welcome_message.php</code>
+
+		<p>The corresponding controller for this page is found at:</p>
+		<code>application/controllers/welcome.php</code>
+
+		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+	</div>
+
+	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>-->
+	
+	<input type="text" id="txt_input1" name="txt_input1" disabled value = "100" />
+	<button class = "clicker2">son goku</button>
+	<br/>
+	<select id="sel">
+	<option value="">Majinboo</option>
+	<option value="">Cell</option>
+	<option value="">Freeza</option>
+	</select>
+	<input type="text" id="txt_input2" name="txt_input2" maxlength="3" style="width:64px" />
+	<button class = "clicker">mr. pogi & co.</button><div id = "warning" >warning: ratio chu chu!</div>
+	<br/>
+	<ul id = "my_ul2">
+	List ni Goku
+	</ul>
+	<br/>
+	<ul id = "my_ul">
+	List ni Mr. Pogi & Co.
+	</ul>
+	<button class = "belat">show me the money</button>
 </div>
- 
+
 </body>
 </html>
