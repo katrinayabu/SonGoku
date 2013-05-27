@@ -70,12 +70,10 @@
 
 	
 
-	var count = 0;
-	var ratio = 100;
-	var total = 0;
-
-		$(document).ready(function(){
-
+$(document).ready(function(){
+				var count = 0;
+				var ratio = 100;
+				var total = 0;
 			$("#warning").hide();
 		
 			$(".clicker2").click(function(){
@@ -92,7 +90,7 @@
 
 				if($("#my_ul li").length < 2){
 					$("#my_ul").append('<li>'+ '<input type="hidden" class="hide" value="'+$("#txt_input2").val()+'" />'
-										+ $('#sel').find("option:selected").text() + "&nbsp;&nbsp;" + $("#txt_input2").val() + "%" + '</li>');
+										+ $('#sel').find("option:selected").text() + "&nbsp;&nbsp;" + $("#txt_input2").val() + "%" + '<button type="button" class="btn_remove_member">Remove</button>'+'</li>');
 				}
 				else{
 					alert("hanggang dalawa lang pre..");
@@ -104,15 +102,13 @@
 			 	total = 0;
 
 			 	$("#my_ul li").find($(".hide")).each(function(){
-							var palit = parseInt($(this).val());
-							console.log(palit);
-							total += palit;
+						var palit = parseInt($(this).val());
+						total+=palit;
+						console.log(!isNaN(total+=palit));
 					});
-
 						ratio = 100 - total;
 						console.log("hello world");
 						$("#txt_input1").val(ratio);
-
 
 				});
 
@@ -160,6 +156,15 @@
 
 					
 
+			});
+			
+			$("#my_ul").delegate(".btn_remove_member", "click", function(){	
+				var thisvalue = parseInt($(this).parent().find($(".hid_members_ratio")).val());
+				ratio = ratio + thisvalue;
+				total = total - thisvalue;
+				console.log(thisvalue);
+				$("#txt_input1").val(ratio);
+				$(this).parent().remove();
 			});
 
 		});
