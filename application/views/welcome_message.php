@@ -74,117 +74,69 @@ $(document).ready(function(){
 				var count = 0;
 				var ratio = 100;
 				var total = 0;
-			$("#warning").hide();
-		
-			$(".clicker2").click(function(){
-				if($("#my_ul2 li").length < 1){
-					$("#my_ul2").append('<li>' + "Son Goku " +$("#txt_input1").val()+ "%" + '</li>');
-				}
-				else{
-					alert("oooppss isa lang..");
-				}
-			});
 			
-			 $(".clicker").click(function(){
-			 	
 
-				if($("#my_ul li").length < 2){
-					$("#my_ul").append('<li>'+ '<input type="hidden" class="hide" value="'+$("#txt_input2").val()+'" />'
-										+ $('#sel').find("option:selected").text() + "&nbsp;&nbsp;" + $("#txt_input2").val() + "%" + '<button type="button" class="btn_remove_member">Remove</button>'+'</li>');
+			$("#btn_addmem").click(function(){
+				if($("#members_list li").length < 2){
+					$("#members_list").append('<li>'+ '<input type="hidden" class="hide" value="'+$("#txt_member_ratio").val()+'" />'
+										+ $('#sel').find("option:selected").text() + "&nbsp;&nbsp;" + $("#txt_member_ratio").val() + "%" + '<button type="button" class="btn_remove_member">Remove</button>'+'</li>');
 				}
 				else{
 					alert("hanggang dalawa lang pre..");
 				}
-				$("#txt_input2").val("");
+				$("#txt_member_ratio").val("");
 
 
 				count++;
 			 	total = 0;
 
-			 	$("#my_ul li").find($(".hide")).each(function(){
+			 	$("#members_list li").find($(".hide")).each(function(){
 						var palit = parseInt($(this).val());
 						total+=palit;
 						//console.log(!isNaN(total+=palit));
 					});
 						ratio = 100 - total;
 						console.log("hello world");
-						$("#txt_input1").val(ratio);
+						$("#txt_main_proponent_ratio").val(ratio);
 
-				});
+			});
 
-			 $("#txt_input2").on("keyup",function(){
+			$("body").delegate("#txt_member_ratio","keyup",function(){
 
 			 	console.log($(this).val() + " --- " + ratio + !(isNaN($(this).val())) );
 
 			 	if(parseInt($(this).val()) > 50 ){
 
-			 		$(".clicker").fadeOut();
+			 		$("#btn_addmem").fadeOut();
 			 		$("#warning").fadeIn();
 
 			 	}
 
 			 	else if((ratio-total)>=parseInt($(this).val()) ){
 
-			 		$(".clicker").fadeIn();
+			 		$("#btn_addmem").fadeIn();
 			 		$("#warning").fadeOut();
 
 			 	}else{
 
-			 		$(".clicker").fadeOut();
+			 		$("#btn_addmem").fadeOut();
 			 		$("#warning").fadeIn();
 
 			 	}
 
 			 });
 
-			   
-			$(".belat").click(function(){
-					
-					var one = parseInt($("#txt_input1").val());
-					var total1 = 0;
-					if(isNaN(one)){
-					  one = 0;
-					}
-				   
-					$("#my_ul li").find($(".hide")).each(function(){
-							var palit = parseInt($(this).val());
-							console.log(palit);
-							total1 += palit;
-					});
-					var superdupertotal = total1+one;
-					alert("sum: " +superdupertotal+ "%");
-
-					
-
-			});
-			
-			$("#my_ul").on("click",".btn_remove_member",function(){
-
+			$("#members_list").delegate(".btn_remove_member","click",function(){
 				var thisvalue = parseInt($(this).parent().find($(".hide")).val());
 				console.log(thisvalue);
 				ratio = ratio + thisvalue;
 				total = total - thisvalue;
-				$("#txt_input1").val(ratio);
+				$("#txt_main_proponent_ratio").val(ratio);
 
 				$(this).parent().remove();
 
 
 			});
-
-
-
-
-			/*
-			$("#my_ul").on(".btn_remove_member", "click", function(){	
-				var thisvalue = parseInt($(this).parent().find($(".hid_members_ratio")).val());
-				ratio = ratio + thisvalue;
-				total = total - thisvalue;
-				console.log(thisvalue);
-				$("#txt_input1").val(ratio);
-				$(this).parent().remove();
-			});
-
-			*/
 
 		});
 
