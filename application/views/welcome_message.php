@@ -104,7 +104,7 @@ $(document).ready(function(){
 			 	$("#my_ul li").find($(".hide")).each(function(){
 						var palit = parseInt($(this).val());
 						total+=palit;
-						console.log(!isNaN(total+=palit));
+						//console.log(!isNaN(total+=palit));
 					});
 						ratio = 100 - total;
 						console.log("hello world");
@@ -158,7 +158,24 @@ $(document).ready(function(){
 
 			});
 			
-			$("#my_ul").delegate(".btn_remove_member", "click", function(){	
+			$("#my_ul").on("click",".btn_remove_member",function(){
+
+				var thisvalue = parseInt($(this).parent().find($(".hide")).val());
+				console.log(thisvalue);
+				ratio = ratio + thisvalue;
+				total = total - thisvalue;
+				$("#txt_input1").val(ratio);
+
+				$(this).parent().remove();
+
+
+			});
+
+
+
+
+			/*
+			$("#my_ul").on(".btn_remove_member", "click", function(){	
 				var thisvalue = parseInt($(this).parent().find($(".hid_members_ratio")).val());
 				ratio = ratio + thisvalue;
 				total = total - thisvalue;
@@ -166,6 +183,8 @@ $(document).ready(function(){
 				$("#txt_input1").val(ratio);
 				$(this).parent().remove();
 			});
+
+			*/
 
 		});
 
